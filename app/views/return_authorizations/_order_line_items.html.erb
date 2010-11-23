@@ -1,0 +1,27 @@
+<table id="order_details" class="index">
+  <tbody id='line-items'>
+    <tr>
+      <% hook :order_details_line_items_headers do %>
+        <th class="rma_check"></th>
+        <th><%= t('item_description') %></th>
+        <th class="price"><%= t('price') %></th>
+        <th class="qty"><%= t('qty') %></th>
+      <% end %>
+    </tr>
+
+    <% @returnable_items.each do |item| %>
+      <% rma_form.fields_for "line_item[]", item do |item_f| %>
+          <tr>
+            <%- locals = {:item => item} -%>
+            <% hook :order_details_line_item_row, locals do %>
+              <td class="rma_check"><%= item_f.check_box :id, :value => item.id %></td>
+              <td width="300"><%=item.variant.product.name-%> <%= "(" + variant_options(item.variant) + ")" unless item.variant .option_values.empty? %></td>
+              <td class="price"><%= number_to_currency item.price -%></td>
+              <td class="qty"><%=item.quantity-%></td>
+            <% end %>
+          </tr>
+          <%= render :partial => 'line_item_reasons', :locals => {:line_item => item, :item_fields => item_f} %>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,105 @@
+<% if params.has_key? :checkout_complete %>
+  <h1><%= t("checkout")%></h1>
+<% else %>
+  <h1><%= t("my_account")%></h1>
+<% end %>
+<br clear="left" />
+<div id="order_confirm">
+
+  <% if params.has_key? :checkout_complete %>
+      <div class="checkout-complete-message">
+      <h2>YOUR ORDER HAS BEEN PROCESSED SUCCESSFULLY</h2>
+      <h3>Welcome to the Rise Poker Movement. Please print out a copy of this 
+        confirmation page for your records.</h3>
+      <p>Your confirmation number is <strong>#<%= @order.number %></strong>.
+      An email with this information has been sent to your address.</p>
+    </div>
+  <% else %>
+    <h2>DETAILS FOR ORDER <span><%= @order.number %></span></h2>
+    <div class="order_info">
+        <div>
+          <strong>
+             Date: 
+          </strong>
+          <%= @order.created_at.to_date.strftime('%b %d %Y %H:%m %p') %><br />
+        </div>
+
+        <div>
+          <strong>
+             Status: 
+          </strong>
+          <%= @order.state.upcase %>
+        </div>
+
+
+        <% if @order.shipments %>
+          <div class="order_shipments">
+            <% @order.shipments.each do |shipment| %>
+              <div><strong>Shipped:</strong> <%= shipment.shipped_at.strftime('%b %d %Y %H:%m %p') %>
+                <% unless shipment.tracking.blank? %>
+                  <br />
+                  Tracking Number: <%= link_to shipment.tracking, shipment.tracking %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+         <% end %>
+
+        <% if @order.return_authorizations %>
+          <h3><%= t('return_authorizations') %></h3>
+            <dl class="order_returns">
+            <% @order.return_authorizations.each do |rma| %>
+              <dt><%= rma.number %></dt> 
+              <dd>
+                <div><strong><%= t('created') %>:</strong> <%= rma.created_at.strftime('%b %d %Y %H:%m %p') %></div>
+                <div><strong><%= t('status') %>:</strong> <%= rma.state.upcase %></div>
+                <% if rma.amount > 0 %>
+                  <div><strong><%= t('rma_credit') %>:</strong> <%= number_to_currency rma.amount %></div>
+                <% end %>
+              </dd>
+            <% end %>
+          </dl>
+        <% end %>
+        <p class="order_links">
+         <% if @order.returnable_units %>
+            <%= link_to "Make a return", new_order_return_authorization_path(@order) %>
+         <% end %>
+        </p>
+
+
+        <div>
+          <strong>
+             Customer email: 
+          </strong>
+          <%= h @order.email %>
+        </div>
+    </div>
+
+    <div class="order_info_addresses">
+        <% if @order.bill_address %>
+            <div class='adr'>
+                <h4> <%= t("bill_address") %> </h4>
+                <%= render :partial => 'admin/shared/address', :locals => {:address => @order.bill_address} %>
+            </div>
+        <% end %>
+        <% if @order.ship_address %>
+            <div class='adr'>
+                <h4> <%= t("ship_address") %> </h4>
+                <%= render :partial => 'admin/shared/address', :locals => {:address => @order.ship_address} %>
+            </div>
+        <% end %>
+    </div>
+    <% end %>
+
+  <div id="order_details">
+  <%= render :partial => 'shared/order_details', :locals => {:order => @order} -%>
+  </div>
+
+  <div id="lnk_back">
+  <% if params.has_key? :checkout_complete %>
+  <%= link_to t('back_to_store'), shop_path %>
+  <% else %>
+  <%= link_to 'Back to My Account overview', account_path %>
+  <% end %>
+  </div>
+</div>

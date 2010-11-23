@@ -1,0 +1,8 @@
+    <tr class="rma_reasons">
+        <td colspan="4">
+            <div class="fields">
+                <%= item_fields.text_area :rma_reason_text, :cols => 40, :rows => 3 %>
+                <%= item_fields.text_field :rma_qty, :value => line_item.quantity, :size=>3 %>
+            </div>
+        </td>
+    </tr>
