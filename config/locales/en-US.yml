@@ -2,3 +2,6 @@
 en:
   details_for_order: Details for order
   returns: Returns
+  customer_email: Customer Email
+  rma_credit: Return Credit
+  back_to_order_detail: Back to Order Detail

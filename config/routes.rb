@@ -1,3 +1,3 @@
 map.resources :orders do |order|
-    order.resources :return_authorizations, :member => {:fire => :put}
+    order.resources :return_authorizations, :only => [:show, :new, :create]
 end

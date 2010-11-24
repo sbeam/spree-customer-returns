@@ -19,23 +19,29 @@
     <div class="order_info">
         <div>
           <strong>
-             Date: 
+            <%= t('order_date') %>
           </strong>
-          <%= @order.created_at.to_date.strftime('%b %d %Y %H:%m %p') %><br />
+          <%= @order.created_at.to_date.strftime(t('date.formats.default')) %><br />
         </div>
 
         <div>
           <strong>
-             Status: 
+             <%= t('status') %>
           </strong>
           <%= @order.state.upcase %>
         </div>
 
+        <div>
+          <strong>
+            <%= t('customer_email') %> 
+          </strong>
+          <%= h @order.email %>
+        </div>
 
         <% if @order.shipments %>
           <div class="order_shipments">
             <% @order.shipments.each do |shipment| %>
-              <div><strong>Shipped:</strong> <%= shipment.shipped_at.strftime('%b %d %Y %H:%m %p') %>
+              <div><strong>Shipped:</strong> <%= shipment.shipped_at.strftime(t('date.formats.default')) %>
                 <% unless shipment.tracking.blank? %>
                   <br />
                   Tracking Number: <%= link_to shipment.tracking, shipment.tracking %>
@@ -51,7 +57,7 @@
             <% @order.return_authorizations.each do |rma| %>
               <dt><%= rma.number %></dt> 
               <dd>
-                <div><strong><%= t('created') %>:</strong> <%= rma.created_at.strftime('%b %d %Y %H:%m %p') %></div>
+                <div><strong><%= t('date_created') %>:</strong> <%= rma.created_at.strftime(t('date.formats.default')) %></div>
                 <div><strong><%= t('status') %>:</strong> <%= rma.state.upcase %></div>
                 <% if rma.amount > 0 %>
                   <div><strong><%= t('rma_credit') %>:</strong> <%= number_to_currency rma.amount %></div>
@@ -67,12 +73,6 @@
         </p>
 
 
-        <div>
-          <strong>
-             Customer email: 
-          </strong>
-          <%= h @order.email %>
-        </div>
     </div>
 
     <div class="order_info_addresses">
