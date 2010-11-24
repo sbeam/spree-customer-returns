@@ -1,51 +1,50 @@
 <h1><%= t("returns")%></h1>
 
-<div id="order-returns-print">
-    <h2><%= t('details_for_return_number', {:rma_no => @return_authorization.number}) %>
-</div>
+<div class="order_confirm" id="order-returns-show">
+    <h2><%= t('details_for_return_number', {:rma_no => @return_authorization.number}) %></h2>
 
-<dl class="order_returns">
-    <dt><%= t('order_number') %></dt>
-    <dd><%= link_to @return_authorization.order.number, order_path(@return_authorization.order) %> - <%= @return_authorization.order.created_at.strftime(t('date.formats.long')) %></dd>
+    <dl class="order_returns">
+        <dt><%= t('order_number') %></dt>
+        <dd><%= link_to @return_authorization.order.number, order_path(@return_authorization.order) %> - <%= @return_authorization.order.created_at.strftime(t('date.formats.long')) %></dd>
 
-    <dt><%= t('date_created') %></dt>
-    <dd><%= @return_authorization.created_at.strftime(t('date.formats.long')) %></dd>
+        <dt><%= t('status') %></dt>
+        <dd> <%= @return_authorization.state.upcase %></dd>
 
-    <dt><%= t('status') %></dt>
-    <dd> <%= @return_authorization.state.upcase %></dd>
+        <dt><%= t('date_created') %></dt>
+        <dd><%= @return_authorization.created_at.strftime(t('date.formats.long')) %></dd>
 
-    <% if @return_authorization.amount > 0 %>
-        <dt><%= t('rma_credit') %></dt>
-        <dd><%= number_to_currency @return_authorization.amount %></dd>
-    <% end %>
-</dl>
+        <% if @return_authorization.amount > 0 %>
+            <dt><%= t('rma_credit') %></dt>
+            <dd><%= number_to_currency @return_authorization.amount %></dd>
+        <% end %>
+    </dl>
 
-<table id="rma_items" class="index">
-  <tr>
-    <th><%= t("product") %></th>
-    <th class="qty"><%= t("return_quantity") %></th>
-  </tr>
-  <% @returned_units.each do |variant_id, unit_list| %>
-      <% unit = unit_list.first %>
+    <table id="rma_items" class="index">
       <tr>
-          <td>
-              <h4><%= unit.variant.name %></h4>
-              <%= unit.variant.options_text %>
-          </td>
-          <td class="qty"><%= unit_list.length %></td>
+        <th><%= t("product") %></th>
+        <th class="qty"><%= t("return_quantity") %></th>
       </tr>
-  <% end %>
-</table>
+      <% @returned_units.each do |variant_id, unit_list| %>
+          <% unit = unit_list.first %>
+          <tr>
+              <td>
+                  <span class="item_name"><%= unit.variant.name %></span> <%= unit.variant.options_text %>
+              </td>
+              <td class="qty"><%= unit_list.length %></td>
+          </tr>
+      <% end %>
+    </table>
 
 
-<div id="rma_reason_text">
-    <h4><%= t("reason") %></h4>
-    <p>
-        <%= h @return_authorization.reason %>
-    </p>
-</div>
+    <div id="rma_reason_text">
+        <h4><%= t("reason") %></h4>
+        <p>
+            <%= h @return_authorization.reason %>
+        </p>
+    </div>
 
 
-<div id="lnk_back">
-    <%= link_to t('back_to_order_detail'), order_path(@return_authorization.order) %>
+    <div id="lnk_back">
+        <%= link_to t('back_to_order_detail'), order_path(@return_authorization.order) %>
+    </div>
 </div>
