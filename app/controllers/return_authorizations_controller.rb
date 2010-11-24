@@ -8,8 +8,10 @@ class ReturnAuthorizationsController < Spree::BaseController
   new_action.before :returnable_units
   edit.before :returnable_units
   show.before :returnable_units
+  create.before :returnable_units 
 
-  create.wants.html { redirect_to order_url(@return_authorization.order) }
+  create.flash I18n.t('your_return_has_been_created') 
+  create.wants.html { redirect_to smart_url(parent_url_options) }
 
   create.after :associate_inventory_units
 

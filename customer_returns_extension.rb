@@ -7,11 +7,12 @@ class CustomerReturnsExtension < Spree::Extension
   url "http://yourwebsite.com/customer_returns"
 
 
-  # def self.require_gems(config)
-  #   config.gem "gemname-goes-here", :version => '1.2.3'
-  # end
-  
   def activate
+
+    # there must be some reason!!
+    ReturnAuthorization.class_eval do
+      validates_presence_of :reason, :on => :create
+    end
 
     # make your helper avaliable in all views
     # Spree::BaseController.class_eval do

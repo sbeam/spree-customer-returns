@@ -1,6 +1,9 @@
 <h1><%= t('returns') %></h1>
 
 <div id="order-returns">
+<% if @object.errors.on :reason  %>
+  <div class="flash errors"><%= t('please_indicate_the_reason') %></div>
+<% end %>
 
   <% if @returnable_units %>
     <% form_for(@object, :url => collection_url) do |f| %>
@@ -10,7 +13,7 @@
         </p>
     <% end %>
   <% else %>
-    <div class="notice">No items in this order can be returned.</div>
+    <div class="notice"><%= t('no_items_can_be_returned') %></div>
   <% end %>
 
   <div id="lnk_back">
