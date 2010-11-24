@@ -7,10 +7,10 @@
 <div class="order_confirm">
 
   <% if params.has_key? :checkout_complete %>
-      <div class="checkout-complete-message">
-        <h2><%= t('your_order_has_been_processed_successfully') %></h2>
-        <h3><%= t('please_print_for_your_records') %></h3>
-        <p><%= t('your_confirmation_number_is', {:order_number => @order.number } ) %></p>
+    <div class="checkout-complete-message">
+      <h2><%= t('your_order_has_been_processed_successfully') %></h2>
+      <h3><%= t('please_print_for_your_records') %></h3>
+      <p><%= t('your_confirmation_number_is', {:order_number => @order.number } ) %></p>
     </div>
   <% else %>
     <h2><%= t('details_for_order') %> <span><%= @order.number %></span></h2>
@@ -37,44 +37,19 @@
         </div>
 
         <% if @order.shipments %>
-          <div class="order_shipments">
-            <% @order.shipments.select{ |s| s.state == 'shipped' }.each do |shipment| %>
-              <div><strong>Shipped</strong> <%= shipment.shipped_at.strftime(t('date.formats.long')) %>
-                <% unless shipment.tracking.blank? %>
-                  <br />
-                  Tracking Number: <%= link_to shipment.tracking, shipment.tracking %>
-                <% end %>
-              </div>
-            <% end %>
-          </div>
-         <% end %>
+          <%= render :partial => 'shipments_list', :locals => {:order => @order} -%>
+        <% end %>
 
         <% unless @order.return_authorizations.empty? %>
           <h3><%= t('return_authorizations') %></h3>
-            <dl class="order_returns">
-            <% @order.return_authorizations.each do |rma| %>
-              <dt><%= rma.number %></dt> 
-              <dd>
-                <div><strong><%= t('date_created') %>:</strong> <%= rma.created_at.strftime(t('date.formats.long')) %></div>
-                <div><strong><%= t('status') %>:</strong> <%= rma.state.upcase %></div>
-                <% if rma.amount > 0 %>
-                  <div><strong><%= t('rma_credit') %>:</strong> <%= number_to_currency rma.amount %></div>
-                <% end %>
-                <% if rma.state == 'authorized' %>
-                  <div class="print"><%= link_to t('print_return_slip'), order_return_authorization_path(@order, rma, {:print=>1}) %></div>
-                <% end %>
-
-              </dd>
-            <% end %>
-          </dl>
+          <%= render :partial => 'return_authorizations/returns_list', :locals => {:order => @order} -%>
         <% end %>
+
         <p class="order_links">
          <% if @order.returnable_units %>
             <%= link_to "Make a return", new_order_return_authorization_path(@order) %>
          <% end %>
         </p>
-
-
     </div>
 
     <div class="order_info_addresses">
@@ -91,17 +66,18 @@
             </div>
         <% end %>
     </div>
-    <% end %>
+  <% end %>
 
   <div id="order_details">
-  <%= render :partial => 'shared/order_details', :locals => {:order => @order} -%>
+    <%= render :partial => 'shared/order_details', :locals => {:order => @order} -%>
   </div>
 
   <div id="lnk_back">
-  <% if params.has_key? :checkout_complete %>
-  <%= link_to t('back_to_store'), shop_path %>
-  <% else %>
-  <%= link_to 'Back to My Account overview', account_path %>
-  <% end %>
+    <% if params.has_key? :checkout_complete %>
+      <%= link_to t('back_to_store'), shop_path %>
+    <% else %>
+      <%= link_to 'Back to My Account overview', account_path %>
+    <% end %>
   </div>
+
 </div>

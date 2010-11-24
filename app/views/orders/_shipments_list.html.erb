@@ -1,0 +1,15 @@
+          <div class="order_shipments">
+            <% order.shipments.select{ |s| s.state == 'shipped' }.each do |shipment| %>
+                <div class="shipment">
+
+                    <strong><%= t('shipped') %></strong> <%= shipment.shipped_at.strftime(t('date.formats.long')) %>
+
+                    <% unless shipment.tracking.blank? %>
+                        <div class="tracking_number">
+                            <strong><%= t('tracking_number') %></strong> <span><%= link_to shipment.tracking, shipment.tracking %></span>
+                        </div>
+                    <% end %>
+
+                </div>
+            <% end %>
+          </div>

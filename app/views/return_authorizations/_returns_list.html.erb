@@ -1,0 +1,16 @@
+          <dl class="order_returns">
+            <% order.return_authorizations.each do |rma| %>
+              <dt><%= rma.number %></dt> 
+              <dd>
+              <div><strong><%= t('date_created') %>:</strong> <%= rma.created_at.strftime(t('date.formats.long')) %></div>
+              <div><strong><%= t('status') %>:</strong> <%= rma.state.upcase %></div>
+              <% if rma.amount > 0 %>
+                <div><strong><%= t('rma_credit') %>:</strong> <%= number_to_currency rma.amount %></div>
+              <% end %>
+              <% if rma.state == 'authorized' %>
+                <div class="print"><%= link_to t('print_return_slip'), order_return_authorization_path(@order, rma, {:print=>1}) %></div>
+              <% end %>
+
+              </dd>
+            <% end %>
+          </dl>
