@@ -4,24 +4,22 @@
   <h1><%= t("my_account")%></h1>
 <% end %>
 <br clear="left" />
-<div id="order_confirm">
+<div class="order_confirm">
 
   <% if params.has_key? :checkout_complete %>
       <div class="checkout-complete-message">
-      <h2>YOUR ORDER HAS BEEN PROCESSED SUCCESSFULLY</h2>
-      <h3>Welcome to the Rise Poker Movement. Please print out a copy of this 
-        confirmation page for your records.</h3>
-      <p>Your confirmation number is <strong>#<%= @order.number %></strong>.
-      An email with this information has been sent to your address.</p>
+        <h2><%= t('your_order_has_been_processed_successfully') %></h2>
+        <h3><%= t('please_print_for_your_records') %></h3>
+        <p><%= t('your_confirmation_number_is', {:order_number => @order.number } ) %></p>
     </div>
   <% else %>
-    <h2>DETAILS FOR ORDER <span><%= @order.number %></span></h2>
+    <h2><%= t('details_for_order') %> <span><%= @order.number %></span></h2>
     <div class="order_info">
         <div>
           <strong>
             <%= t('order_date') %>
           </strong>
-          <%= @order.created_at.to_date.strftime(t('date.formats.default')) %><br />
+          <%= @order.created_at.to_date.strftime(t('date.formats.long')) %><br />
         </div>
 
         <div>
@@ -41,7 +39,7 @@
         <% if @order.shipments %>
           <div class="order_shipments">
             <% @order.shipments.each do |shipment| %>
-              <div><strong>Shipped:</strong> <%= shipment.shipped_at.strftime(t('date.formats.default')) %>
+              <div><strong>Shipped</strong> <%= shipment.shipped_at.strftime(t('date.formats.long')) %>
                 <% unless shipment.tracking.blank? %>
                   <br />
                   Tracking Number: <%= link_to shipment.tracking, shipment.tracking %>
@@ -57,7 +55,7 @@
             <% @order.return_authorizations.each do |rma| %>
               <dt><%= rma.number %></dt> 
               <dd>
-                <div><strong><%= t('date_created') %>:</strong> <%= rma.created_at.strftime(t('date.formats.default')) %></div>
+                <div><strong><%= t('date_created') %>:</strong> <%= rma.created_at.strftime(t('date.formats.long')) %></div>
                 <div><strong><%= t('status') %>:</strong> <%= rma.state.upcase %></div>
                 <% if rma.amount > 0 %>
                   <div><strong><%= t('rma_credit') %>:</strong> <%= number_to_currency rma.amount %></div>
