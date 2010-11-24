@@ -38,7 +38,7 @@
 
         <% if @order.shipments %>
           <div class="order_shipments">
-            <% @order.shipments.each do |shipment| %>
+            <% @order.shipments.select{ |s| s.state == 'shipped' }.each do |shipment| %>
               <div><strong>Shipped</strong> <%= shipment.shipped_at.strftime(t('date.formats.long')) %>
                 <% unless shipment.tracking.blank? %>
                   <br />
@@ -49,7 +49,7 @@
           </div>
          <% end %>
 
-        <% if @order.return_authorizations %>
+        <% unless @order.return_authorizations.empty? %>
           <h3><%= t('return_authorizations') %></h3>
             <dl class="order_returns">
             <% @order.return_authorizations.each do |rma| %>
