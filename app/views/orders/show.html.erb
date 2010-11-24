@@ -28,7 +28,7 @@
           <strong>
              <%= t('status') %>
           </strong>
-          <%= @order.state.upcase %>
+          <%= @order.state.upcase.gsub(/_/, ' ') %>
         </div>
 
         <div>
@@ -62,6 +62,10 @@
                 <% if rma.amount > 0 %>
                   <div><strong><%= t('rma_credit') %>:</strong> <%= number_to_currency rma.amount %></div>
                 <% end %>
+                <% if rma.state == 'authorized' %>
+                  <div class="print"><%= link_to t('print_return_slip'), order_return_authorization_path(@order, rma, {:print=>1}) %></div>
+                <% end %>
+
               </dd>
             <% end %>
           </dl>

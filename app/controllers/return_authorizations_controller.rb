@@ -7,6 +7,7 @@ class ReturnAuthorizationsController < Spree::BaseController
 
   new_action.before :returnable_units
   edit.before :returnable_units
+  show.before :returnable_units
 
   create.wants.html { redirect_to order_url(@return_authorization.order) }
 

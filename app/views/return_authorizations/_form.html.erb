@@ -1,8 +1,8 @@
 <table class="index">
   <tr>
     <th><%= t("product") %></th>
-    <th><%= t("quantity_shipped") %></th>
-    <th><%= t("return_quantity") %></th>
+    <th class="qty"><%= t("quantity_shipped") %></th>
+    <th class="return_quantity"><%= t("return_quantity") %></th>
   </tr>
   <% @returnable_units.each_pair do |variant, qty| %>
     <tr id="<%= dom_id(variant) %>">
@@ -10,7 +10,7 @@
         <h4 style="margin-bottom:0px;"><%= variant.name %></h4>
         <%= variant.options_text %>
       </td>
-      <td><%= qty %></td>
+      <td class="qty"><%= qty %></td>
       <td class="return_quantity">
         <%= select_tag "return_quantity[#{variant.id}]",
           options_for_select( 0.upto(qty).collect{ |i| [i,i] } ) %>

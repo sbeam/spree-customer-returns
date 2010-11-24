@@ -1,7 +1,9 @@
 ---
 en:
   details_for_order: Details for order
+  details_for_return_number: Details for Return {{rma_no}}
   returns: Returns
   customer_email: Customer Email
   rma_credit: Return Credit
   back_to_order_detail: Back to Order Detail
+  print_return_slip: Print Return Slip
