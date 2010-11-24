@@ -7,3 +7,6 @@ en:
   rma_credit: Return Credit
   back_to_order_detail: Back to Order Detail
   print_return_slip: Print Return Slip
+  please_print_for_your_records: Welcome to the Rise Poker Movement. Please print out a copy of this confirmation page for your records.
+  your_confirmation_number_is: Your confirmation number is <strong>#{{order_number}}</strong>. An email with this information has been sent to your address.
+  your_order_has_been_processed_successfully: YOUR ORDER HAS BEEN PROCESSED SUCCESSFULLY
