@@ -13,6 +13,7 @@ class ReturnAuthorizationsController < Spree::BaseController
   create.flash I18n.t('your_return_has_been_created') 
   create.wants.html { redirect_to smart_url(parent_url_options) }
 
+  # TODO this comes after create so we can't verify there are variants attached.
   create.after :associate_inventory_units
 
 
