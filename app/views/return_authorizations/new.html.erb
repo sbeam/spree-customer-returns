@@ -1,7 +1,9 @@
 <h1><%= t('returns') %></h1>
 
 <div id="order-returns">
-<% if @object.errors.on :reason  %>
+<% if @object.errors.on :variant  %>
+  <div class="flash errors"><%= t('please_select_one_item') %></div>
+<% elsif @object.errors.on :reason  %>
   <div class="flash errors"><%= t('please_indicate_the_reason') %></div>
 <% end %>
 
