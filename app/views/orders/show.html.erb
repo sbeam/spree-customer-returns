@@ -1,14 +1,12 @@
-<% if params.has_key? :checkout_complete %>
-  <h1><%= t("checkout")%></h1>
-<% else %>
-  <h1><%= t("my_account")%></h1>
-<% end %>
-<br clear="left" />
+  <% if params.has_key? :checkout_complete %>
+    <h1><%= t("checkout")%></h1>
+  <% else %>
+    <h1><%= t("my_account")%></h1>
+  <% end %>
 <div class="order_confirm">
 
   <% if params.has_key? :checkout_complete %>
     <div class="checkout-complete-message">
-      <h2><%= t('your_order_has_been_processed_successfully') %></h2>
       <h3><%= t('please_print_for_your_records') %></h3>
       <p><%= t('your_confirmation_number_is', {:order_number => @order.number } ) %></p>
     </div>

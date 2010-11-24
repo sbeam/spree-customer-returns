@@ -1,12 +1,11 @@
 ---
 en:
   details_for_order: Details for order
-  details_for_return_number: Details for Return {{rma_no}}
+  details_for_return_number: Details for Return %{rma_no}
   returns: Returns
   customer_email: Customer Email
   rma_credit: Return Credit
   back_to_order_detail: Back to Order Detail
   print_return_slip: Print Return Slip
   please_print_for_your_records: Thank you for your order! Please print out a copy of this confirmation page for your records.
-  your_confirmation_number_is: Your confirmation number is <strong>#{{order_number}}</strong>. An email with this information has been sent to your address.
-  your_order_has_been_processed_successfully: YOUR ORDER HAS BEEN PROCESSED SUCCESSFULLY
+  your_confirmation_number_is: Your confirmation number is <strong>#%{order_number}</strong>. An email with this information has been sent to your address.
