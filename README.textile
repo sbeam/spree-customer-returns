@@ -1,0 +1,23 @@
+h1. Customer Returns
+
+Your customer will be able to initiate their own Return (RMA) their 'My Account' list of orders.
+
+Includes an enhanced Order Detail page (order#show) that shows all shipments and returns currently associated with the order.  If the order is shipped, the customer is given a link to a simple RMA form similar to the one in admin land. The customer can create an RMA for any shipped item they desire, and can keep creating RMAs until there are no more items in the order that can be returned.
+
+Once the RMA is created, customer can view the RMA and (given a good print stylesheet) print it out for include in the box to ship back.
+
+note: there are no styles included for the printable RMA view
+
+h2. Changes ###
+
+Version 1.0 - released 23 Nov 2010
+
+h2. Requirements ###
+
+Spree =~ 0.11.99 (not 0.30, yet)
+
+h2. TODO
+
+* store owner to be notified on RMA creation
+* Tests :/
+
