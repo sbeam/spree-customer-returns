@@ -13,3 +13,7 @@ en:
   no_items_can_be_returned: No items in this order can be returned.
   your_return_has_been_created: Your return has been entered into the system. Please click "Print Return Slip" to create a printable return.
   please_select_one_item: Please select at least one item to be returned.
+  none_given: None given.
+  please_print_this_page: Please print this page and include it in the package with items to be returned.
+  printable_version: to view a printable version of this page.
+

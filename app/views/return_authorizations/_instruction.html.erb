@@ -1,0 +1,18 @@
+<div id="return_authorization_instruct">
+    <% if params[:print] %>
+        <%= t(:please_print_this_page) %>
+    <% else %>
+        <%= link_to t('print_return_slip'), order_return_authorization_path(@order, @return_authorization, {:print=>1}) %> <%= t(:printable_version) %>
+    <% end %>
+
+    <h2>Send to</h2>
+    <address>
+        <span>Internet Returns</span>
+        <span><strong>RMA Number: </strong><%= @return_authorization.number %></span>
+        <span>123 Risewell Pkwy.</span>
+        <span>Rancho Dorado, CA 90220</span>
+    </address>
+
+</div>
+
+
