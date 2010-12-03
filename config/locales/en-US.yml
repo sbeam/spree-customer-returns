@@ -8,7 +8,7 @@ en:
   back_to_order_detail: Back to Order Detail
   print_return_slip: Print Return Slip
   please_print_for_your_records: Thank you for your order! Please print out a copy of this confirmation page for your records.
-  your_confirmation_number_is: Your confirmation number is <strong>#%{order_number}</strong>. An email with this information has been sent to your address.
+  your_confirmation_number_is: Your confirmation number is <strong>#%{order_number}</strong>. An order confirmation has been emailed to you.
   please_indicate_the_reason: Please indicate the reasons for your return.
   no_items_can_be_returned: No items in this order can be returned.
   your_return_has_been_created: Your return has been entered into the system. Please click "Print Return Slip" to create a printable return.
