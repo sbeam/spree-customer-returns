@@ -2,11 +2,13 @@
             <% order.shipments.select{ |s| s.state == 'shipped' }.each do |shipment| %>
                 <div class="shipment">
 
-                    <strong><%= t('shipped') %></strong> <%= shipment.shipped_at.strftime(t('date.formats.long')) %>
+                    <strong><%= t('shipped') %></strong> <%= shipment.shipped_at.strftime(t('date.formats.long')) %><br />
+
+                    <strong><%= t('shipped_via') %></strong> <%= h shipment.shipping_method.name %>
 
                     <% unless shipment.tracking.blank? %>
                         <div class="tracking_number">
-                            <strong><%= t('tracking_number') %></strong> <span><%= link_to shipment.tracking, shipment.tracking %></span>
+                          <strong><%= t('tracking_number') %></strong> <span><%= link_to_tracking shipment.tracking, shipment.shipping_method, :class => 'ext' %></span>
                         </div>
                     <% end %>
 
