@@ -18,9 +18,9 @@ class CustomerReturnsExtension < Spree::Extension
     # make your helper avaliable in all views
     OrdersHelper.module_eval do
       def link_to_tracking tnum, method, options={}
-        if method.name.match /^UPS\b/ 
+        if method.name.match /\bUPS\b/ 
           link_to tnum, 'http://wwwapps.ups.com/WebTracking/processInputRequest?TypeOfInquiryNumber=T&InquiryNumber1='+tnum, options
-        elsif method.name.match /^USPS\b/ 
+        elsif method.name.match /\bUSPS\b/ 
           link_to tnum, 'http://trkcnfrm1.smi.usps.com/PTSInternetWeb/InterLabelInquiry.do?origTrackNum='+tnum, options
         else
           tnum
